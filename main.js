@@ -3,12 +3,15 @@ const desktopMenu = document.querySelector('.desktop-menu')
 const menuHamburguesa = document.querySelector('.menu')
 const mobileMenu = document.querySelector('.mobile-menu')
 const menuCarrito = document.querySelector('.navbar-shopping-cart')
+const productDetailClose = document.querySelector('.product-detail-close')
 const shoppingCartContainer = document.querySelector('#shoppingCartContainer')
+const productDetailContainer = document.querySelector('#productDetail')
 const cardsContainer = document.querySelector('.cards-container')
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 menuHamburguesa.addEventListener('click', toggleMenuHarburguesa);
 menuCarrito.addEventListener('click', toggleMenuCarrito);
+productDetailClose.addEventListener('click', closeProductDetail);
 
 function toggleDesktopMenu() {
     desktopMenu.classList.toggle('inactive')
@@ -16,6 +19,9 @@ function toggleDesktopMenu() {
 
 function toggleMenuHarburguesa() {
     if (!shoppingCartContainer.classList.contains('inactive')) {
+        closeProductDetail()
+    }
+    if (productDetailContainer.classList.add('inactive')) {
         toggleMenuCarrito()
     }
     mobileMenu.classList.toggle('inactive')
@@ -25,7 +31,17 @@ function toggleMenuCarrito() {
     if (!mobileMenu.classList.contains('inactive')) {
         toggleMenuHarburguesa()
     }
+    if (productDetailContainer.classList.add('inactive')) {
+        toggleMenuCarrito()
+    }
     shoppingCartContainer.classList.toggle('inactive')
+}
+
+function closeProductDetail() {
+    if (!productDetailContainer.classList.add('inactive')) {
+        toggleMenuCarrito()
+    }
+    productDetailContainer.classList.add('inactive')
 }
 
 
@@ -55,6 +71,7 @@ function renderProducts(productList) {
     
         const productImg = document.createElement('img')
         productImg.setAttribute('src', product.image)
+        productImg.addEventListener('click', abrirDetalle)
     
         const productInfo = document.createElement('div')
         productInfo.classList.add('product-info')
@@ -84,6 +101,10 @@ function renderProducts(productList) {
     
         cardsContainer.appendChild(productCard)
     }
+}
+
+function abrirDetalle() {
+    productDetailContainer.classList.remove('inactive')
 }
 
 renderProducts(productList)
