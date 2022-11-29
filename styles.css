@@ -127,7 +127,9 @@
 .mobile-menu {
   background-color: var(--white);
   position: absolute;
+  left: 0;
   top: 60px;
+  width: 100%;
   padding: 24px;
 }
 .mobile-menu a {
@@ -315,7 +317,7 @@ aside {
     position: absolute;
     right: 0;
   }
-  #productDetail-close {
+  .product-detail-close {
     background: var(--white);
     width: 14px;
     height: 14px;
